@@ -18,8 +18,22 @@ void BlackWhiteQuadTree::build(std::vector<std::vector<int> > &data) {
 	this->head_ = this->build(data, 0, data[0].size() - 1, 0, data.size() - 1).second;
 }
 
+void BlackWhiteQuadTree::print_grid(int n) {
+	std::vector<std::vector<int> > data(n, std::vector<int>(n, 0));
+
+	this->print_grid(this->head_, data);
+
+	for (auto v : data) {
+		for (auto e : v) {
+			std::cout << (e == 0 ? '.' : 'X');
+		}
+		std::cout << std::endl;
+	}
+}
+
+
 std::pair<int, Node<int> *> BlackWhiteQuadTree::build(std::vector<std::vector<int> > &data, int x_i, int x_f, int y_i, int y_f) {
-	if (x_i == x_f && y_i == y_f) return std::make_pair(data[x_i][y_i] == 0, nullptr);
+	if (x_i == x_f && y_i == y_f) return std::make_pair(data[y_i][x_i] == 0, nullptr);
 
 	int mid_x = (x_i + x_f) / 2;
 	int mid_y = (y_i + y_f) / 2;
@@ -46,6 +60,18 @@ std::pair<int, Node<int> *> BlackWhiteQuadTree::build(std::vector<std::vector<in
 	node->children_[3] = r[3].second;
 
 	return std::make_pair(2, node);
+}
+
+void BlackWhiteQuadTree::print_grid(Node<int> *node, std::vector<std::vector<int> > &data) {
+	if (node != nullptr) {
+		this->print_grid(node->children_[0], data);
+		this->print_grid(node->children_[1], data);
+
+		data[node->y_][node->x_] = 1;
+
+		this->print_grid(node->children_[2], data);
+		this->print_grid(node->children_[3], data);
+	}
 }
 
 } // namespace quad_tree

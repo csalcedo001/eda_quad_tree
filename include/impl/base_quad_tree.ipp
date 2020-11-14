@@ -3,6 +3,9 @@
 
 #include "base_quad_tree.hpp"
 
+#include <iostream>
+#include <vector>
+
 namespace eda {
 
 namespace quad_tree {

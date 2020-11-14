@@ -11,9 +11,11 @@ namespace quad_tree {
 class BlackWhiteQuadTree : public BaseQuadTree<int, Node<int> > {
 public:
 	void build(std::vector<std::vector<int> > &);
+	void print_grid(int n);
 
 private:
 	std::pair<int, Node<int> *> build(std::vector<std::vector<int> > &, int, int, int, int);
+	void print_grid(Node<int> *, std::vector<std::vector<int> > &);
 };
 
 } // namespace quad_tree
