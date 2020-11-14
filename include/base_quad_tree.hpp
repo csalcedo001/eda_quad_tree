@@ -7,14 +7,14 @@ namespace quad_tree {
 
 template <typename T, class Node>
 class BaseQuadTree {
-private:
+protected:
 	Node *head_;
 
 public:
 	BaseQuadTree();
 	void insert(T, T, std::string);
 
-private:
+protected:
 	void insert(Node *&, T, T, std::string);
 };
 
