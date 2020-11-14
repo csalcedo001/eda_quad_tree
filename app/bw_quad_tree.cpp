@@ -21,5 +21,7 @@ int main() {
 
 	bw_quad_tree.build(data);
 
+	bw_quad_tree.print();
+
 	return 0;
 }

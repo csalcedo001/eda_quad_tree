@@ -12,37 +12,6 @@ namespace eda {
 
 namespace quad_tree {
 
-// void BlackWhiteQuadTree::build(int x_i, int x_f, int y_i, int y_f) {
-// 	if (x_i == x_f && y_i == y_f) return;
-// 
-// 	int mid_x = (x_i + x_f) / 2;
-// 	int mid_y = (y_i + y_f) / 2;
-// 
-// 	int color;
-// 
-// 	color = data[x][j];
-// 
-// 	for (int i = x_i; i < mid_x; i++) {
-// 		for (int j = 0; j < mid_y; j++) {
-// 			if (
-// 
-// 	int results[4];
-// 
-// 	results[0] = this->build(x_i, mid_x, y_i, mid_y);
-// 	results[1] = this->build(mid_i, x_f, y_i, mid_y);
-// 	results[2] = this->build(x_i, mid_x, mid_y, y_f);
-// 	results[3] = this->build(mid_i, x_f, mid_y, y_f);
-// 
-// 	if (results[0] == 0 && results[1] == 0 && results[2] == 0 results[3] == 0) {
-// 		return 0;
-// 	}
-// 	if (results[0] == 1 && results[1] == 1 && results[2] == 1 results[3] == 1) {
-// 		return 1;
-// 	}
-// 
-// 	return 2;
-// }
-
 void BlackWhiteQuadTree::build(std::vector<std::vector<int> > &data) {
 	if (data.size() < 1 || data[0].size() < 1) return;
 

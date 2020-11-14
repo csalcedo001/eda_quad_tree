@@ -20,5 +20,7 @@ int main() {
 		quad_tree.insert(x, y, name);
 	}
 
+	quad_tree.print();
+
 	return 0;
 }
