@@ -13,12 +13,12 @@ protected:
 public:
 	BaseQuadTree();
 	~BaseQuadTree();
-	void insert(int, int, T &);
+	void insert(int, int, T);
 	void print();
 	void clear();
 
 protected:
-	void insert(Node *&, int, int, T &);
+	void insert(Node *&, int, int, T);
 	void print(Node *, int level);
 	void kill(Node *);
 };

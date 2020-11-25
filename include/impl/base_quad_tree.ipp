@@ -21,7 +21,7 @@ BaseQuadTree<T, Node>::~BaseQuadTree() {
 }
 
 template <typename T, class Node>
-void BaseQuadTree<T, Node>::insert(int x, int y, T &data) {
+void BaseQuadTree<T, Node>::insert(int x, int y, T data) {
 	this->insert(this->head_, x, y, data);
 }
 
@@ -36,7 +36,7 @@ void BaseQuadTree<T, Node>::clear() {
 }
 
 template <typename T, class Node>
-void BaseQuadTree<T, Node>::insert(Node *&node, int x, int y, T &data) {
+void BaseQuadTree<T, Node>::insert(Node *&node, int x, int y, T data) {
 	if (node == nullptr) {
 		node = new Node(x, y, data);
 		return;
