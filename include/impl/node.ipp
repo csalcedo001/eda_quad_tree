@@ -8,8 +8,8 @@ namespace eda {
 namespace quad_tree {
 
 template <typename T>
-Node<T>::Node(T x, T y, std::string name) :
-	BaseNode<T, Node<T> >(x, y, name)
+Node<T>::Node(int x, int y, T &data) :
+	BaseNode<T, Node<T> >(x, y, data)
 { }
 
 } // namespace quad_tree

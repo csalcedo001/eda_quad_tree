@@ -12,12 +12,15 @@ protected:
 
 public:
 	BaseQuadTree();
-	void insert(T, T, std::string);
+	~BaseQuadTree();
+	void insert(int, int, T &);
 	void print();
+	void clear();
 
 protected:
-	void insert(Node *&, T, T, std::string);
+	void insert(Node *&, int, int, T &);
 	void print(Node *, int level);
+	void kill(Node *);
 };
 
 } // namespace quad_tree

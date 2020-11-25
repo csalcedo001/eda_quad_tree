@@ -10,7 +10,7 @@ namespace quad_tree {
 template <typename T>
 class Node : public BaseNode<T, Node<T> > {
 public:
-	Node(T, T, std::string);
+	Node(int, int, T &);
 };
 
 } // namespace quad_tree

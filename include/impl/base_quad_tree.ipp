@@ -16,8 +16,13 @@ BaseQuadTree<T, Node>::BaseQuadTree() :
 { }
 
 template <typename T, class Node>
-void BaseQuadTree<T, Node>::insert(T x, T y, std::string name) {
-	this->insert(this->head_, x, y, name);
+BaseQuadTree<T, Node>::~BaseQuadTree() {
+	this->clear();
+}
+
+template <typename T, class Node>
+void BaseQuadTree<T, Node>::insert(int x, int y, T &data) {
+	this->insert(this->head_, x, y, data);
 }
 
 template <typename T, class Node>
@@ -26,16 +31,21 @@ void BaseQuadTree<T, Node>::print() {
 }
 
 template <typename T, class Node>
-void BaseQuadTree<T, Node>::insert(Node *&node, T x, T y, std::string name) {
+void BaseQuadTree<T, Node>::clear() {
+	this->kill(this->head_);
+}
+
+template <typename T, class Node>
+void BaseQuadTree<T, Node>::insert(Node *&node, int x, int y, T &data) {
 	if (node == nullptr) {
-		node = new Node(x, y, name);
+		node = new Node(x, y, data);
 		return;
 	}
 
 	bool left_side = x < node->x_;
 	bool top_side = y < node->y_;
 
-	this->insert(node->children_[(top_side << 1) | left_side], x, y, name);
+	this->insert(node->children_[(top_side << 1) | left_side], x, y, data);
 }
 
 template <typename T, class Node>
@@ -47,10 +57,20 @@ void BaseQuadTree<T, Node>::print(Node *node, int level) {
 		for (int i = 0; i < level; i++) {
 			std::cout << "    ";
 		}
-		std::cout << node->x_ << ' ' << node->y_ << std::endl;
+		std::cout << node->x_ << ' ' << node->y_ << ": " << node->data_ << std::endl;
 
 		this->print(node->children_[2], level + 1);
 		this->print(node->children_[3], level + 1);
+	}
+}
+
+template <typename T, class Node>
+void BaseQuadTree<T, Node>::kill(Node *node) {
+	if (node != nullptr) {
+		this->kill(node->children_[0]);
+		this->kill(node->children_[1]);
+		this->kill(node->children_[2]);
+		this->kill(node->children_[3]);
 	}
 }
 

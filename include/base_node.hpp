@@ -8,12 +8,12 @@ namespace quad_tree {
 template <typename T, class Node>
 class BaseNode {
 public:
-	T x_;
-	T y_;
-	std::string name_;
+	int x_;
+	int y_;
+	T data_;
 	Node *children_[4];
 
-	BaseNode(T, T, std::string);
+	BaseNode(int, int, T &);
 };
 
 } // namespace quad_tree

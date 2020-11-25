@@ -5,7 +5,7 @@
 using namespace std;
 
 int main() {
-	eda::quad_tree::QuadTree<int> quad_tree;
+	eda::quad_tree::QuadTree<string> quad_tree;
 
 	int n;
 
