@@ -22,6 +22,9 @@ namespace eda {
 namespace quad_tree {
 
 class BaseImageQuadTree : public BaseQuadTree<int, Node<int> > {
+public:
+	friend Image;
+
 protected:
 	int width_;
 	int height_;

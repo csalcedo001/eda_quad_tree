@@ -21,8 +21,9 @@ Image::Image(int width, int height) :
 { }
 
 Image::Image(BaseImageQuadTree &tree) :
-	width_(tree.width()),
-	height_(tree.height())
+	width_(tree.width_),
+	height_(tree.height_),
+	grid_(tree.height_, std::vector<int>(tree.width_, 0))
 {
 	// TODO: fill grid from quad tree
 }
@@ -33,6 +34,10 @@ int Image::width() {
 
 int Image::height() {
 	return this->height_;
+}
+
+std::vector<std::vector<int> > &Image::grid() {
+	return this->grid_;
 }
 
 void Image::set_cell(int x, int y, int value) {

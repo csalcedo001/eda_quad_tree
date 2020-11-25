@@ -16,6 +16,12 @@ BaseImageQuadTree::BaseImageQuadTree(int width, int height) :
 	height_(height)
 { }
 
+BaseImageQuadTree::BaseImageQuadTree(Image &image) :
+	BaseQuadTree<int, Node<int> >(),
+	width_(image.width_),
+	height_(image.height_)
+{ }
+
 int BaseImageQuadTree::width() {
 	return this->width_;
 }

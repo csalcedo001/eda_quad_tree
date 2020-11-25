@@ -20,6 +20,9 @@ namespace eda {
 namespace quad_tree {
 
 class Image {
+public:
+	friend BaseImageQuadTree;
+
 protected:
 	int width_;
 	int height_;
@@ -32,6 +35,7 @@ public:
 
 	int width();
 	int height();
+	std::vector<std::vector<int> > &grid();
 	void set_cell(int, int, int);
 	void print();
 };
