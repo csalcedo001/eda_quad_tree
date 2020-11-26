@@ -95,8 +95,8 @@ void ScanQuadTree::fill(Node<Pixel> *node, Image &image, int x_i, int x_f, int y
 		return;
 	}
 
-	int mid_x = (x_i + x_f) / 2;
-	int mid_y = (y_i + y_f) / 2;
+	int mid_x = node->x_;
+	int mid_y = node->y_;
 
 	this->fill(node->children_[0], image, x_i, mid_x, y_i, mid_y);
 	this->fill(node->children_[1], image, mid_x + 1, x_f, y_i, mid_y);

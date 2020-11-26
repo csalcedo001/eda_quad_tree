@@ -7,7 +7,7 @@
 using namespace std;
 
 int main() {
-	eda::quad_tree::ScanQuadTree s(10, 20, 0);
+	eda::quad_tree::ScanQuadTree s(10, 10, 0);
 
 	s.insert(5, 5, 0);
 	s.insert(2, 0, 255);

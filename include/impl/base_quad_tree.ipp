@@ -42,10 +42,10 @@ void BaseQuadTree<T, Node>::insert(Node *&node, int x, int y, T data) {
 		return;
 	}
 
-	bool left_side = x < node->x_;
-	bool top_side = y < node->y_;
+	bool right_side = x > node->x_;
+	bool down_side = y > node->y_;
 
-	this->insert(node->children_[(top_side << 1) | left_side], x, y, data);
+	this->insert(node->children_[(down_side << 1) + right_side], x, y, data);
 }
 
 template <typename T, class Node>
