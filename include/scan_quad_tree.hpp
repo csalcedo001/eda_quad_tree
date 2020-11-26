@@ -11,12 +11,13 @@ namespace quad_tree {
 
 class ScanQuadTree : public BaseImageQuadTree {
 public:
-	ScanQuadTree(int, int);
-	ScanQuadTree(Image &);
+	ScanQuadTree(int, int, double);
+	ScanQuadTree(Image &, double);
 
 private:
 	void build(Node<Pixel> *&, Image &, int, int, int, int);
 	bool same_color(Image &, int, int, int, int);
+	Pixel average_pixel(Image &, int, int, int, int);
 };
 
 } // namespace quad_tree

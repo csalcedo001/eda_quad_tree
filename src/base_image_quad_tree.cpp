@@ -11,16 +11,18 @@ namespace eda {
 
 namespace quad_tree {
 
-BaseImageQuadTree::BaseImageQuadTree(int width, int height) :
+BaseImageQuadTree::BaseImageQuadTree(int width, int height, double threshold) :
 	BaseQuadTree<Pixel, Node<Pixel> >(),
 	width_(width),
-	height_(height)
+	height_(height),
+	threshold_(threshold)
 { }
 
-BaseImageQuadTree::BaseImageQuadTree(Image &image) :
+BaseImageQuadTree::BaseImageQuadTree(Image &image, double threshold) :
 	BaseQuadTree<Pixel, Node<Pixel> >(),
 	width_(image.width_),
-	height_(image.height_)
+	height_(image.height_),
+	threshold_(threshold)
 { }
 
 int BaseImageQuadTree::width() {

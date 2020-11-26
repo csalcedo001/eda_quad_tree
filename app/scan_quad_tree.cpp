@@ -22,9 +22,13 @@ int main() {
 		}
 	}
 
-	eda::quad_tree::ScanQuadTree scan_quad_tree(image);
+	eda::quad_tree::ScanQuadTree scan_quad_tree(image, 0);
 
+	cout << "Input image:" << endl;
+	image.print();
+	cout << "Quad tree grid:" << endl;
 	scan_quad_tree.print_grid();
+	cout << "Quad tree:" << endl;
 	scan_quad_tree.print();
 
 	return 0;

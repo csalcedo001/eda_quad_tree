@@ -29,10 +29,11 @@ public:
 protected:
 	int width_;
 	int height_;
+	double threshold_;
 
 public:
-	BaseImageQuadTree(int, int);
-	BaseImageQuadTree(Image &);
+	BaseImageQuadTree(int, int, double);
+	BaseImageQuadTree(Image &, double);
 
 	void print_grid();
 	int width();
