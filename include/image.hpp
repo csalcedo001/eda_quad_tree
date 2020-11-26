@@ -14,6 +14,7 @@ class Image;
 } // namespace eda
 
 #include "base_image_quad_tree.hpp"
+#include "pixel.hpp"
 
 namespace eda {
 
@@ -26,7 +27,7 @@ public:
 protected:
 	int width_;
 	int height_;
-	std::vector<std::vector<int> > grid_;
+	std::vector<std::vector<Pixel> > grid_;
 
 public:
 	Image(const Image &);
@@ -35,8 +36,8 @@ public:
 
 	int width();
 	int height();
-	std::vector<std::vector<int> > &grid();
-	void set_cell(int, int, int);
+	std::vector<std::vector<Pixel> > &grid();
+	void set_cell(int, int, Pixel);
 	void print();
 };
 

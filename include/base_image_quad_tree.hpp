@@ -16,12 +16,13 @@ class BaseImageQuadTree;
 #include "base_quad_tree.hpp"
 #include "image.hpp"
 #include "node.hpp"
+#include "pixel.hpp"
 
 namespace eda {
 
 namespace quad_tree {
 
-class BaseImageQuadTree : public BaseQuadTree<int, Node<int> > {
+class BaseImageQuadTree : public BaseQuadTree<Pixel, Node<Pixel> > {
 public:
 	friend Image;
 
@@ -38,7 +39,7 @@ public:
 	int height();
 
 protected:
-	void print_grid(Node<int> *, std::vector<std::vector<int> > &);
+	void print_grid(Node<Pixel> *, std::vector<std::vector<bool> > &);
 };
 
 } // namespace quad_tree

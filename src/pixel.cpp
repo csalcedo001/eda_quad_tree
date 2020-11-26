@@ -6,17 +6,27 @@ namespace eda {
 
 namespace quad_tree {
 
-Pixel::Pixel(const Pixel &pixel) {
-	this->r = pixel.r;
-	this->g = pixel.g;
-	this->b = pixel.b;
-}
+Pixel::Pixel(const Pixel &pixel) :
+	r(pixel.r),
+	g(pixel.g),
+	b(pixel.b)
+{ }
 
 Pixel::Pixel(int r, int g, int b) :
 	r(r),
 	g(g),
 	b(b)
 { }
+
+Pixel::Pixel(int b) :
+	r(b),
+	g(b),
+	b(b)
+{ }
+
+double Pixel::average() {
+	return (this->r + this->g + this->b) / 3.0;
+}
 
 std::ostream& operator<<(std::ostream &os, const Pixel &pixel) {
 	os << pixel.r << ' ' << pixel.g << ' ' << pixel.b;

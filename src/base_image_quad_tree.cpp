@@ -5,19 +5,20 @@
 #include "base_quad_tree.hpp"
 #include "image.hpp"
 #include "node.hpp"
+#include "pixel.hpp"
 
 namespace eda {
 
 namespace quad_tree {
 
 BaseImageQuadTree::BaseImageQuadTree(int width, int height) :
-	BaseQuadTree<int, Node<int> >(),
+	BaseQuadTree<Pixel, Node<Pixel> >(),
 	width_(width),
 	height_(height)
 { }
 
 BaseImageQuadTree::BaseImageQuadTree(Image &image) :
-	BaseQuadTree<int, Node<int> >(),
+	BaseQuadTree<Pixel, Node<Pixel> >(),
 	width_(image.width_),
 	height_(image.height_)
 { }
@@ -31,27 +32,27 @@ int BaseImageQuadTree::height() {
 }
 
 void BaseImageQuadTree::print_grid() {
-	std::vector<std::vector<int> > data(this->height_, std::vector<int>(this->width_, 0));
+	std::vector<std::vector<bool> > grid(this->height_, std::vector<bool>(this->width_, false));
 
-	this->print_grid(this->head_, data);
+	this->print_grid(this->head_, grid);
 
-	for (auto v : data) {
-		for (auto e : v) {
-			std::cout << (e == 0 ? '.' : 'X');
+	for (auto row : grid) {
+		for (auto cell : row) {
+			std::cout << (cell ? 'X' : '.');
 		}
 		std::cout << std::endl;
 	}
 }
 
-void BaseImageQuadTree::print_grid(Node<int> *node, std::vector<std::vector<int> > &data) {
+void BaseImageQuadTree::print_grid(Node<Pixel> *node, std::vector<std::vector<bool> > &grid) {
 	if (node != nullptr) {
-		this->print_grid(node->children_[0], data);
-		this->print_grid(node->children_[1], data);
+		this->print_grid(node->children_[0], grid);
+		this->print_grid(node->children_[1], grid);
 
-		data[node->y_][node->x_] = 1;
+		grid[node->y_][node->x_] = true;
 
-		this->print_grid(node->children_[2], data);
-		this->print_grid(node->children_[3], data);
+		this->print_grid(node->children_[2], grid);
+		this->print_grid(node->children_[3], grid);
 	}
 }
 

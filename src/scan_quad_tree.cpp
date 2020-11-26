@@ -15,14 +15,17 @@ ScanQuadTree::ScanQuadTree(Image &image) :
 	this->build(this->head_, image, 0, this->width_ - 1, 0, this->height_ - 1);
 }
 
-void ScanQuadTree::build(Node<int> *&node, Image &image, int x_i, int x_f, int y_i, int y_f) {
-	if (this->same_color(image, x_i, x_f, y_i, y_f)) return;
-
+void ScanQuadTree::build(Node<Pixel> *&node, Image &image, int x_i, int x_f, int y_i, int y_f) {
 	int mid_x = (x_i + x_f) / 2;
 	int mid_y = (y_i + y_f) / 2;
 
-	int value = 0;
-	node = new Node<int>(mid_x, mid_y, value);
+	if (this->same_color(image, x_i, x_f, y_i, y_f)) {
+		node = x_i > x_f || y_i > y_f ? nullptr : new Node<Pixel>(mid_x, mid_y, image.grid()[x_i][y_i]);
+		return;
+	}
+
+	Pixel tmp;
+	node = new Node<Pixel>(mid_x, mid_y, tmp);
 	
 	this->build(node->children_[0], image, x_i, mid_x, y_i, mid_y);
 	this->build(node->children_[1], image, mid_x + 1, x_f, y_i, mid_y);
@@ -33,11 +36,11 @@ void ScanQuadTree::build(Node<int> *&node, Image &image, int x_i, int x_f, int y
 bool ScanQuadTree::same_color(Image &image, int x_i, int x_f, int y_i, int y_f) {
 	if (x_i > x_f || y_i > y_f) return true;
 
-	int color = image.grid()[x_i][y_i];
+	Pixel color = image.grid()[x_i][y_i];
 
 	for (int i = x_i; i <= x_f; i++) {
 		for (int j = y_i; j <= y_f; j++) {
-			if (image.grid()[i][j] != color) {
+			if (image.grid()[i][j].average() != color.average()) {
 				return false;
 			}
 		}
@@ -45,67 +48,6 @@ bool ScanQuadTree::same_color(Image &image, int x_i, int x_f, int y_i, int y_f) 
 
 	return true;
 }
-
-// void ScanQuadTree::build(std::vector<std::vector<int> > &data) {
-// 	if (data.size() < 1 || data[0].size() < 1) return;
-// 
-// 	this->build(this->head_, data, 0, data[0].size() - 1, 0, data.size() - 1);
-// }
-// 
-// void ScanQuadTree::print_grid(int n) {
-// 	std::vector<std::vector<int> > data(n, std::vector<int>(n, 0));
-// 
-// 	this->print_grid(this->head_, data);
-// 
-// 	for (auto v : data) {
-// 		for (auto e : v) {
-// 			std::cout << (e == 0 ? '.' : 'X');
-// 		}
-// 		std::cout << std::endl;
-// 	}
-// }
-// 
-// void ScanQuadTree::build(Node<int> *&node, std::vector<std::vector<int> > &data, int x_i, int x_f, int y_i, int y_f) {
-// 	if (this->same_color(data, x_i, x_f, y_i, y_f)) {
-// 		return;
-// 	}
-// 
-// 	int mid_x = (x_i + x_f) / 2;
-// 	int mid_y = (y_i + y_f) / 2;
-// 
-// 	node = new Node<int>(mid_x, mid_y, "");
-// 	
-// 	this->build(node->children_[0], data, x_i, mid_x, y_i, mid_y);
-// 	this->build(node->children_[1], data, mid_x + 1, x_f, y_i, mid_y);
-// 	this->build(node->children_[2], data, x_i, mid_x, mid_y + 1, y_f);
-// 	this->build(node->children_[3], data, mid_x + 1, x_f, mid_y + 1, y_f);
-// }
-// 
-// bool ScanQuadTree::same_color(std::vector<std::vector<int> > &data, int x_i, int x_f, int y_i, int y_f) {
-// 	int color = data[x_i][y_i];
-// 
-// 	for (int i = x_i; i <= x_f; i++) {
-// 		for (int j = y_i; j <= y_f; i++) {
-// 			if (data[i][j] != color) {
-// 				return false;
-// 			}
-// 		}
-// 	}
-// 
-// 	return true;
-// }
-// 
-// void ScanQuadTree::print_grid(Node<int> *node, std::vector<std::vector<int> > &data) {
-// 	if (node != nullptr) {
-// 		this->print_grid(node->children_[0], data);
-// 		this->print_grid(node->children_[1], data);
-// 
-// 		data[node->y_][node->x_] = 1;
-// 
-// 		this->print_grid(node->children_[2], data);
-// 		this->print_grid(node->children_[3], data);
-// 	}
-// }
 
 } // namespace quad_tree
 

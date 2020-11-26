@@ -1,6 +1,7 @@
 # Project ignores
 bin/*
 build/*
+test*
 
 # Prerequisites
 *.d

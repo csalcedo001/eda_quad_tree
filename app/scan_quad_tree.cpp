@@ -1,6 +1,7 @@
 #include <iostream>
 
 #include "scan_quad_tree.hpp"
+#include "pixel.hpp"
 
 using namespace std;
 
@@ -17,7 +18,7 @@ int main() {
 		for (int j = 0; j < n; j++) {
 			cin >> c;
 
-			image.set_cell(i, j, c);
+			image.set_cell(i, j, eda::quad_tree::Pixel(c * 255));
 		}
 	}
 

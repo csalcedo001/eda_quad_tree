@@ -3,6 +3,7 @@
 #include <vector>
 
 #include "base_image_quad_tree.hpp"
+#include "pixel.hpp"
 
 namespace eda {
 
@@ -17,13 +18,13 @@ Image::Image(const Image &image) :
 Image::Image(int width, int height) :
 	width_(width),
 	height_(height),
-	grid_(height, std::vector<int>(width, 0))
+	grid_(height, std::vector<Pixel>(width, 0))
 { }
 
 Image::Image(BaseImageQuadTree &tree) :
 	width_(tree.width_),
 	height_(tree.height_),
-	grid_(tree.height_, std::vector<int>(tree.width_, 0))
+	grid_(tree.height_, std::vector<Pixel>(tree.width_, 0))
 {
 	// TODO: fill grid from quad tree
 }
@@ -36,18 +37,18 @@ int Image::height() {
 	return this->height_;
 }
 
-std::vector<std::vector<int> > &Image::grid() {
+std::vector<std::vector<Pixel> > &Image::grid() {
 	return this->grid_;
 }
 
-void Image::set_cell(int x, int y, int value) {
-	this->grid_[x][y] = value;
+void Image::set_cell(int x, int y, Pixel pixel) {
+	this->grid_[x][y] = pixel;
 }
 
 void Image::print() {
-	for (auto v : this->grid_) {
-		for (auto e : v) {
-			std::cout << (e == 0 ? '.' : 'X');
+	for (auto row : this->grid_) {
+		for (auto pixel : row) {
+			std::cout << (pixel.r + pixel.g + pixel.b < 3 * 128 ? '.' : 'X');
 		}
 		std::cout << std::endl;
 	}
