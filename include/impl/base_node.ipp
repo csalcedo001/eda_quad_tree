@@ -20,6 +20,17 @@ BaseNode<T, Node>::BaseNode(int x, int y, T &data) :
 	}
 }
 
+template <typename T, class Node>
+bool BaseNode<T, Node>::is_leave() {
+	int l = 4;
+
+	while (l--) {
+		if (this->children_[l] != nullptr) return false;
+	}
+
+	return true;
+}
+
 } // namespace quad_tree
 
 } // namespace eda

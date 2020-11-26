@@ -7,7 +7,7 @@
 using namespace std;
 
 int main() {
-	eda::quad_tree::ScanQuadTree s(10, 10, 0);
+	eda::quad_tree::ScanQuadTree s(10, 20, 0);
 
 	s.insert(5, 5, 0);
 	s.insert(2, 0, 255);
@@ -24,9 +24,7 @@ int main() {
 	cout << "Print quad tree grid" << endl;
 	s.print_grid();
 
-	eda::quad_tree::Pixel white(255);
-
-	image.set_cell(5, 5, white);
+	image.set_cell(1, 8, 255);
 
 	eda::quad_tree::ScanQuadTree s2(image, 0);
 

@@ -13,7 +13,9 @@ public:
 	T data_;
 	Node *children_[4];
 
+public:
 	BaseNode(int, int, T &);
+	bool is_leave();
 };
 
 } // namespace quad_tree

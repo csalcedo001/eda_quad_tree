@@ -15,6 +15,10 @@ ScanQuadTree::ScanQuadTree(Image &image, double threshold) :
 	this->build(this->head_, image, 0, this->width_ - 1, 0, this->height_ - 1);
 }
 
+void ScanQuadTree::fill(Image &image) {
+	this->fill(this->head_, image, 0, this->width_ - 1, 0, this->height_ - 1);
+}
+
 void ScanQuadTree::build(Node<Pixel> *&node, Image &image, int x_i, int x_f, int y_i, int y_f) {
 	int mid_x = (x_i + x_f) / 2;
 	int mid_y = (y_i + y_f) / 2;
@@ -43,11 +47,11 @@ bool ScanQuadTree::same_color(Image &image, int x_i, int x_f, int y_i, int y_f) 
 
 	int min_color, max_color;
 
-	min_color = max_color = image.grid()[x_i][y_i].average();
+	min_color = max_color = image.grid()[y_i][x_i].average();
 
-	for (int i = x_i; i <= x_f; i++) {
-		for (int j = y_i; j <= y_f; j++) {
-			int color = image.grid()[i][j].average();
+	for (int j = y_i; j <= y_f; j++) {
+		for (int i = x_i; i <= x_f; i++) {
+			int color = image.grid()[j][i].average();
 
 			if (color < min_color) min_color = color;
 			if (color > max_color) max_color = color;
@@ -64,9 +68,9 @@ bool ScanQuadTree::same_color(Image &image, int x_i, int x_f, int y_i, int y_f) 
 Pixel ScanQuadTree::average_pixel(Image &image, int x_i, int x_f, int y_i, int y_f) {
 	int r = 0, g = 0, b = 0;
 
-	for (int i = x_i; i <= x_f; i++) {
-		for (int j = y_i; j <= y_f; j++) {
-			Pixel pixel = image.grid()[i][j];
+	for (int j = y_i; j <= y_f; j++) {
+		for (int i = x_i; i <= x_f; i++) {
+			Pixel pixel = image.grid()[j][i];
 
 			r += pixel.r;
 			g += pixel.g;
@@ -77,6 +81,27 @@ Pixel ScanQuadTree::average_pixel(Image &image, int x_i, int x_f, int y_i, int y
 	int total = (x_f - x_i + 1) * (y_f - y_i + 1);
 
 	return Pixel(r / total, g / total, b / total);
+}
+
+void ScanQuadTree::fill(Node<Pixel> *node, Image &image, int x_i, int x_f, int y_i, int y_f) {
+	if (node == nullptr) return;
+
+	if (node->is_leave()) {
+		for (int j = y_i; j <= y_f; j++) {
+			for (int i = x_i; i <= x_f; i++) {
+				image.grid()[j][i] = node->data_;
+			}
+		}
+		return;
+	}
+
+	int mid_x = (x_i + x_f) / 2;
+	int mid_y = (y_i + y_f) / 2;
+
+	this->fill(node->children_[0], image, x_i, mid_x, y_i, mid_y);
+	this->fill(node->children_[1], image, mid_x + 1, x_f, y_i, mid_y);
+	this->fill(node->children_[2], image, x_i, mid_x, mid_y + 1, y_f);
+	this->fill(node->children_[3], image, mid_x + 1, x_f, mid_y + 1, y_f);
 }
 
 } // namespace quad_tree

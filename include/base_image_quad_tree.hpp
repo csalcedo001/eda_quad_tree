@@ -41,6 +41,9 @@ public:
 
 protected:
 	void print_grid(Node<Pixel> *, std::vector<std::vector<bool> > &);
+
+public:
+	virtual void fill(Image &) = 0;
 };
 
 } // namespace quad_tree
