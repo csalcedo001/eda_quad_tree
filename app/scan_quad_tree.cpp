@@ -18,18 +18,22 @@ int main() {
 		for (int j = 0; j < n; j++) {
 			cin >> c;
 
-			image.set_cell(i, j, eda::quad_tree::Pixel(c * 255));
+			image.set_cell(j, i, eda::quad_tree::Pixel(c * 255));
 		}
 	}
 
 	eda::quad_tree::ScanQuadTree scan_quad_tree(image, 0);
 
+	eda::quad_tree::Image reconstructed_image(scan_quad_tree);
+
 	cout << "Input image:" << endl;
 	image.print();
-	cout << "Quad tree grid:" << endl;
+
+	cout << "Compressed quad tree grid:" << endl;
 	scan_quad_tree.print_grid();
-	cout << "Quad tree:" << endl;
-	scan_quad_tree.print();
+
+	cout << "Reconstructed image:" << endl;
+	reconstructed_image.print();
 
 	return 0;
 }
