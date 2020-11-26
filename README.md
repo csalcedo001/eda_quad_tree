@@ -13,7 +13,7 @@ Run `make` to compile the executables and run
 to test the plain quad tree structure or
 
 ```
-./bw_quad_tree <data/bw_quad_tree_2.in
+./scan_quad_tree < data/image_quad_tree_horse.in
 ```
 
-for the black and white quad tree version.
+for the binary image quad tree version.
