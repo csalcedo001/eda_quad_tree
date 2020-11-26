@@ -12,7 +12,13 @@ BaseNode<T, Node>::BaseNode(int x, int y, T &data) :
 	x_(x),
 	y_(y),
 	data_(data)
-{ }
+{
+	int l = 4;
+
+	while (l--) {
+		this->children_[l] = nullptr;
+	}
+}
 
 } // namespace quad_tree
 

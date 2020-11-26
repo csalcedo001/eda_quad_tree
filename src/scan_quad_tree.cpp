@@ -11,12 +11,12 @@ ScanQuadTree::ScanQuadTree(int width, int height) :
 
 ScanQuadTree::ScanQuadTree(Image &image) :
 	BaseImageQuadTree(image)
-{ }
+{
+	this->build(this->head_, image, 0, this->width_ - 1, 0, this->height_ - 1);
+}
 
 void ScanQuadTree::build(Node<int> *&node, Image &image, int x_i, int x_f, int y_i, int y_f) {
-	if (this->same_color(image, x_i, x_f, y_i, y_f)) {
-		return;
-	}
+	if (this->same_color(image, x_i, x_f, y_i, y_f)) return;
 
 	int mid_x = (x_i + x_f) / 2;
 	int mid_y = (y_i + y_f) / 2;
@@ -31,10 +31,12 @@ void ScanQuadTree::build(Node<int> *&node, Image &image, int x_i, int x_f, int y
 }
 
 bool ScanQuadTree::same_color(Image &image, int x_i, int x_f, int y_i, int y_f) {
+	if (x_i > x_f || y_i > y_f) return true;
+
 	int color = image.grid()[x_i][y_i];
 
 	for (int i = x_i; i <= x_f; i++) {
-		for (int j = y_i; j <= y_f; i++) {
+		for (int j = y_i; j <= y_f; j++) {
 			if (image.grid()[i][j] != color) {
 				return false;
 			}
