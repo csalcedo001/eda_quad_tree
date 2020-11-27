@@ -58,6 +58,16 @@ void BaseImageQuadTree::print_grid(Node<Pixel> *node, std::vector<std::vector<bo
 	}
 }
 
+void BaseImageQuadTree::save_header(std::ostream &os) {
+	os.write((char *) &this->width_, sizeof(int));
+	os.write((char *) &this->height_, sizeof(int));
+}
+
+void BaseImageQuadTree::load_header(std::istream &is) {
+	is.read((char *) &this->width_, sizeof(int));
+	is.read((char *) &this->height_, sizeof(int));
+}
+
 } // namespace quad_tree
 
 } // namespace eda

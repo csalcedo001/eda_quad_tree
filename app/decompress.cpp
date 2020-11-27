@@ -31,7 +31,7 @@ int main(int argc, char **argv) {
 	}
 
 	// TODO: update data loading to restore image width and height
-	eda::quad_tree::ScanQuadTree quad_tree(1000, 1000, 0);
+	eda::quad_tree::ScanQuadTree quad_tree(0, 0, 0);
 
 	quad_tree.load(quad_tree_file);
 

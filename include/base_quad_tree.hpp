@@ -27,6 +27,8 @@ protected:
 	void kill(Node *);
 	long long save(Node *, std::ostream &);
 	Node *load(long long, std::istream &);
+	virtual void save_header(std::ostream &);
+	virtual void load_header(std::istream &);
 };
 
 } // namespace quad_tree

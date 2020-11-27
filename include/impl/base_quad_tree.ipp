@@ -39,7 +39,13 @@ template <typename T, class Node>
 void BaseQuadTree<T, Node>::save(std::ostream &os) {
 	if (this->head_ == nullptr) return;
 
-	os.seekp(2 * sizeof(int) + sizeof(T) + 4 * sizeof(long long), os.beg);
+	os.seekp(0, os.beg);
+
+	this->save_header(os);
+
+	long long data_position = os.tellp();
+
+	os.seekp(2 * sizeof(int) + sizeof(T) + 4 * sizeof(long long), os.cur);
 
 	long long disk_children[4];
 
@@ -47,7 +53,7 @@ void BaseQuadTree<T, Node>::save(std::ostream &os) {
 		disk_children[i] = this->save(this->head_->children_[i], os);
 	}
 
-	os.seekp(0, os.beg);
+	os.seekp(data_position, os.beg);
 
 	os.write((char *) &this->head_->x_, sizeof(int));
 	os.write((char *) &this->head_->y_, sizeof(int));
@@ -64,14 +70,14 @@ void BaseQuadTree<T, Node>::load(std::istream &is) {
 
 	is.seekg(0, is.beg);
 
+	this->load_header(is);
+
 	int x, y;
 	T data;
 
 	is.read((char *) &x, sizeof(int));
 	is.read((char *) &y, sizeof(int));
 	is.read((char *) &data, sizeof(T));
-
-	// std::cout << x << ' ' << y << ' ' << data << std::endl;
 
 	this->head_ = new Node(x, y, data);
 
@@ -157,8 +163,6 @@ Node *BaseQuadTree<T, Node>::load(long long position, std::istream &is) {
 	int x, y;
 	T data;
 
-	// std::cout << x << ' ' << y << ' ' << data << std::endl;
-
 	is.read((char *) &x, sizeof(int));
 	is.read((char *) &y, sizeof(int));
 	is.read((char *) &data, sizeof(T));
@@ -177,6 +181,12 @@ Node *BaseQuadTree<T, Node>::load(long long position, std::istream &is) {
 
 	return node;
 }
+
+template <typename T, class Node>
+void BaseQuadTree<T, Node>::save_header(std::ostream &os) { }
+
+template <typename T, class Node>
+void BaseQuadTree<T, Node>::load_header(std::istream &is) { }
 
 } // namespace quad_tree
 

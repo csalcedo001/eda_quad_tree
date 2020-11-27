@@ -2,6 +2,7 @@
 #define QUAD_TREE_BASE_IMAGE_QUAD_TREE_HPP_
 
 #include <vector>
+#include <fstream>
 
 namespace eda {
 
@@ -44,6 +45,10 @@ protected:
 
 public:
 	virtual void fill(Image &) = 0;
+
+protected:
+	void save_header(std::ostream &);
+	void load_header(std::istream &);
 };
 
 } // namespace quad_tree
