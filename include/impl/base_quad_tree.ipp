@@ -36,6 +36,57 @@ void BaseQuadTree<T, Node>::clear() {
 }
 
 template <typename T, class Node>
+void BaseQuadTree<T, Node>::save(std::ostream &os) {
+	if (this->head_ == nullptr) return;
+
+	os.seekp(2 * sizeof(int) + sizeof(T) + 4 * sizeof(long long), os.beg);
+
+	long long disk_children[4];
+
+	for (int i = 0; i < 4; i++) {
+		disk_children[i] = this->save(this->head_->children_[i], os);
+	}
+
+	os.seekp(0, os.beg);
+
+	os.write((char *) &this->head_->x_, sizeof(int));
+	os.write((char *) &this->head_->y_, sizeof(int));
+	os.write((char *) &this->head_->data_, sizeof(T));
+
+	for (int i = 0; i < 4; i++) {
+		os.write((char *) &disk_children[i], sizeof(long long));
+	}
+}
+
+template <typename T, class Node>
+void BaseQuadTree<T, Node>::load(std::istream &is) {
+	this->clear();
+
+	is.seekg(0, is.beg);
+
+	int x, y;
+	T data;
+
+	is.read((char *) &x, sizeof(int));
+	is.read((char *) &y, sizeof(int));
+	is.read((char *) &data, sizeof(T));
+
+	// std::cout << x << ' ' << y << ' ' << data << std::endl;
+
+	this->head_ = new Node(x, y, data);
+
+	long long positions[4];
+
+	for (int i = 0; i < 4; i++) {
+		is.read((char *) &positions[i], sizeof(long long));
+	}
+
+	for (int i = 0; i < 4; i++) {
+		this->head_->children_[i] = this->load(positions[i], is);
+	}
+}
+
+template <typename T, class Node>
 void BaseQuadTree<T, Node>::insert(Node *&node, int x, int y, T data) {
 	if (node == nullptr) {
 		node = new Node(x, y, data);
@@ -72,6 +123,59 @@ void BaseQuadTree<T, Node>::kill(Node *node) {
 		this->kill(node->children_[2]);
 		this->kill(node->children_[3]);
 	}
+}
+
+template <typename T, class Node>
+long long BaseQuadTree<T, Node>::save(Node *node, std::ostream &os) {
+	if (node == nullptr) return 0;
+
+	long long disk_children[4];
+
+	for (int i = 0; i < 4; i++) {
+		disk_children[i] = this->save(node->children_[i], os);
+	}
+
+	long long position = os.tellp();
+
+	os.write((char *) &node->x_, sizeof(int));
+	os.write((char *) &node->y_, sizeof(int));
+	os.write((char *) &node->data_, sizeof(T));
+
+	for (int i = 0; i < 4; i++) {
+		os.write((char *) &disk_children[i], sizeof(long long));
+	}
+
+	return position;
+}
+
+template <typename T, class Node>
+Node *BaseQuadTree<T, Node>::load(long long position, std::istream &is) {
+	if (position == 0) return nullptr;
+
+	is.seekg(position, is.beg);
+
+	int x, y;
+	T data;
+
+	// std::cout << x << ' ' << y << ' ' << data << std::endl;
+
+	is.read((char *) &x, sizeof(int));
+	is.read((char *) &y, sizeof(int));
+	is.read((char *) &data, sizeof(T));
+
+	Node *node = new Node(x, y, data);
+
+	long long positions[4];
+
+	for (int i = 0; i < 4; i++) {
+		is.read((char *) &positions[i], sizeof(long long));
+	}
+
+	for (int i = 0; i < 4; i++) {
+		node->children_[i] = this->load(positions[i], is);
+	}
+
+	return node;
 }
 
 } // namespace quad_tree

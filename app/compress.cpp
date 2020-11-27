@@ -34,15 +34,19 @@ int main(int argc, char **argv) {
 
 	eda::quad_tree::Image image(n, m);
 
-	int r, g, b;
+	eda::quad_tree::Pixel pixel;
 
 	for (int i = 0; i < n; i++) {
 		for (int j = 0; j < m; j++) {
-			cin >> r >> g >> b;
+			cin >> pixel;
 
-			image.set_cell(j, i, eda::quad_tree::Pixel(r, g, b));
+			image.set_cell(j, i, pixel);
 		}
 	}
 
 	eda::quad_tree::ScanQuadTree quad_tree(image, threshold);
+
+	quad_tree.save(output_file);
+
+	return 0;
 }

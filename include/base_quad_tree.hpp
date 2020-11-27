@@ -1,6 +1,8 @@
 #ifndef QUAD_TREE_BASE_QUAD_TREE_HPP_
 #define QUAD_TREE_BASE_QUAD_TREE_HPP_
 
+#include <fstream>
+
 namespace eda {
 
 namespace quad_tree {
@@ -16,11 +18,15 @@ public:
 	void insert(int, int, T);
 	void print();
 	void clear();
+	void save(std::ostream &);
+	void load(std::istream &);
 
 protected:
 	void insert(Node *&, int, int, T);
 	void print(Node *, int level);
 	void kill(Node *);
+	long long save(Node *, std::ostream &);
+	Node *load(long long, std::istream &);
 };
 
 } // namespace quad_tree
