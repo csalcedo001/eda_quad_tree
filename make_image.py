@@ -26,9 +26,9 @@ if f.mode == 'r':
 		for j in range(ancho):
 			line = f.readline()
 			a, b, c = line.split();
-			img[i][j][0] = int(a)
+			img[i][j][2] = int(a)
 			img[i][j][1] = int(b)
-			img[i][j][2] = int(c)
+			img[i][j][0] = int(c)
 
 f.close()
 cv2.imwrite(n_img, img)
