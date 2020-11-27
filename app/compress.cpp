@@ -28,16 +28,16 @@ int main(int argc, char **argv) {
 	ss >> threshold;
 
 
-	int n, m;
+	int width, height;
 
-	cin >> n >> m;
+	cin >> width >> height;
 
-	eda::quad_tree::Image image(n, m);
+	eda::quad_tree::Image image(width, height);
 
 	eda::quad_tree::Pixel pixel;
 
-	for (int i = 0; i < n; i++) {
-		for (int j = 0; j < m; j++) {
+	for (int i = 0; i < height; i++) {
+		for (int j = 0; j < width; j++) {
 			cin >> pixel;
 
 			image.set_cell(j, i, pixel);

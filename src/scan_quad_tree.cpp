@@ -29,7 +29,7 @@ void ScanQuadTree::build(Node<Pixel> *&node, Image &image, int x_i, int x_f, int
 	}
 
 	if (this->same_color(image, x_i, x_f, y_i, y_f)) {
-		node = new Node<Pixel>(mid_x, mid_y, this->average_pixel( image, x_i, x_f, y_i, y_f));
+		node = new Node<Pixel>(mid_x, mid_y, this->average_pixel(image, x_i, x_f, y_i, y_f));
 		return;
 	}
 
