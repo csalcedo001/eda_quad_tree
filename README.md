@@ -2,9 +2,11 @@
 
 Quad tree implementation
 
-## Tests
+## Setup
 
 Run `make` to compile the executables and run tests.
+
+## Tests
 
 ### Quad tree
 
