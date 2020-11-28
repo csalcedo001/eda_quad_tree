@@ -35,7 +35,12 @@ python3 process_image_input.py <image_path> data/rgb/test.in
 ./bin/compress data/compressed/test.dat <threshold> < data/rgb/test.in
 ```
 
-For an example compression run `./compress.sh`, which takes a sample image from the data directory and compresses it with a threshold of 100.
+For an example compression run `./compress.sh`, which takes a sample image from the data directory and compresses it with a threshold of 100. The results are shown below.
+
+##### Original image
 
 ![Original image](data/image/input.png)
+
+##### Reconstructed image
+
 ![Reconstructed image](data/image/result.png)
