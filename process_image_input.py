@@ -3,7 +3,7 @@ import numpy
 import matplotlib.pyplot as plt
 import os
 
-n_img = "data/image/test.png"
+n_img = "data/image/input.png"
 img = cv2.imread(n_img);
 img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
 

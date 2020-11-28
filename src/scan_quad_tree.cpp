@@ -56,7 +56,7 @@ bool ScanQuadTree::same_color(Image &image, int x_i, int x_f, int y_i, int y_f) 
 			if (color < min_color) min_color = color;
 			if (color > max_color) max_color = color;
 
-			if (max_color - min_color > this->threshold_) {
+			if (max_color - min_color >= this->threshold_) {
 				return false;
 			}
 		}

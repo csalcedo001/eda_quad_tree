@@ -2,8 +2,8 @@ import cv2
 import numpy as np
 import matplotlib.pyplot as plt
 
-n_file = "data/rgb/test.in"
-n_img = "img_comprimida.png"
+n_file = "data/rgb/test.out"
+n_img = "data/image/result.png"
 
 f = open(n_file, 'r')
 altura = 0
@@ -18,8 +18,6 @@ img = np.empty((altura, ancho, 3))
 a = ""
 b = ""
 c = ""
-#print("altura ", altura)
-#print("ancho ", ancho)
 
 if f.mode == 'r':
 	for i in range(altura):

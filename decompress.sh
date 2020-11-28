@@ -1,4 +1,9 @@
 #!/bin/bash
 
-./bin/decompress tests/quad_tree.dat tests/result.out
-./bin/visualize < tests/result.out > result.out
+if [ ! -f bin/decompress ]
+then
+	make
+fi
+
+./bin/decompress data/compressed/test.dat data/rgb/test.out
+python3 make_image.py

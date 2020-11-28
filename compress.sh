@@ -1,4 +1,9 @@
 #!/bin/bash
 
-mkdir -p tests
-./bin/compress tests/quad_tree.dat 0 < data/rgb/test.in
+if [ ! -f bin/compress ]
+then
+	make
+fi
+
+python3 process_image_input.py
+./bin/compress data/compressed/test.dat 50 < data/rgb/test.in

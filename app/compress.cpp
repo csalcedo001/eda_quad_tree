@@ -10,7 +10,7 @@ using namespace std;
 
 int main(int argc, char **argv) {
 	if (argc != 3) {
-		cerr << "error: missing argument. Usage: " << argv[0] << " <path> <threshold>" << endl;
+		cerr << "error: missing arguments. Usage: " << argv[0] << " <output_path> <threshold>" << endl;
 		return 1;
 	}
 

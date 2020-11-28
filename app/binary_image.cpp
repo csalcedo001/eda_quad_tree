@@ -22,7 +22,7 @@ int main() {
 		}
 	}
 
-	eda::quad_tree::ScanQuadTree scan_quad_tree(image, 0);
+	eda::quad_tree::ScanQuadTree scan_quad_tree(image, 1);
 
 	eda::quad_tree::Image reconstructed_image(scan_quad_tree);
 

@@ -7,7 +7,7 @@
 using namespace std;
 
 int main() {
-	eda::quad_tree::ScanQuadTree s(10, 10, 0);
+	eda::quad_tree::ScanQuadTree s(10, 10, 1);
 
 	s.insert(5, 5, 0);
 	s.insert(2, 0, 255);
@@ -26,7 +26,7 @@ int main() {
 
 	image.set_cell(1, 8, 255);
 
-	eda::quad_tree::ScanQuadTree s2(image, 0);
+	eda::quad_tree::ScanQuadTree s2(image, 1);
 
 
 	cout << "Print image" << endl;

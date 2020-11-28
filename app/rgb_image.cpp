@@ -6,25 +6,25 @@
 using namespace std;
 
 int main() {
-	int n;
+	int width, height;
 
-	cin >> n;
+	cin >> width >> height;
 
-	eda::quad_tree::Image image(n, n);
+	eda::quad_tree::Image image(width, height);
 
 	int c;
 
 	eda::quad_tree::Pixel pixel;
 
-	for (int i = 0; i < n; i++) {
-		for (int j = 0; j < n; j++) {
+	for (int i = 0; i < height; i++) {
+		for (int j = 0; j < width; j++) {
 			cin >> pixel;
 
 			image.set_cell(j, i, pixel);
 		}
 	}
 
-	eda::quad_tree::ScanQuadTree scan_quad_tree(image, 0);
+	eda::quad_tree::ScanQuadTree scan_quad_tree(image, 1);
 
 	eda::quad_tree::Image reconstructed_image(scan_quad_tree);
 
