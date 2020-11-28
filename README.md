@@ -36,8 +36,7 @@ With traditional RGB images, information is lost during compression. We can comp
 python3 process_image_input.py <image_path> data/rgb/test.in
 ./bin/compress data/compressed/test.dat <threshold> < data/rgb/test.in
 ```
-
-For an example compression run `./compress.sh`, which takes a sample image from the data directory and compresses it with a threshold of 100. The results are shown below.
+Trees saved on the default location shown above can be decompressed easily by executing `./decompress.sh`. For an example compression run `./compress.sh`, which compresses a sample image with a threshold of 100. Both the original and reconstructed images are shown below.
 
 ##### Original image
 
