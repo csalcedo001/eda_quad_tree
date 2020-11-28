@@ -5,5 +5,5 @@ then
 	make
 fi
 
-python3 process_image_input.py
+python3 process_image_input.py data/image/input.png data/rgb/test.in
 ./bin/compress data/compressed/test.dat 50 < data/rgb/test.in
