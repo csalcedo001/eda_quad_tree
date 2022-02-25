@@ -38,6 +38,16 @@ python3 process_image_input.py <image_path> data/rgb/test.in
 ```
 Trees saved on the default location shown above can be decompressed easily by executing `./decompress.sh`. For an example compression run `./compress.sh`, which compresses a sample image with a threshold of 100. Both the original and reconstructed images are shown below.
 
+#### Results
+![](readme_images/img1.png)
+![](readme_images/img2.png)
+![](readme_images/img3.png)
+#### Memory comparison
+![](readme_images/table1.png)
+
+
+
+---
 ##### Original image
 
 ![Original image](data/image/input.png)
@@ -45,3 +55,4 @@ Trees saved on the default location shown above can be decompressed easily by ex
 ##### Reconstructed image
 
 ![Reconstructed image](data/image/result.png)
+---
