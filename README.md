@@ -44,15 +44,3 @@ Trees saved on the default location shown above can be decompressed easily by ex
 ![](readme_images/img3.png)
 #### Memory comparison
 ![](readme_images/table1.png)
-
-
-
----
-##### Original image
-
-![Original image](data/image/input.png)
-
-##### Reconstructed image
-
-![Reconstructed image](data/image/result.png)
----
